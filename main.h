@@ -1,24 +1,29 @@
-#ifndef our_printf
-#define our_printf
-#include <stdio.h>
+#ifndef MAIN_H
+#define MAIN_H
+
 #include <stdarg.h>
+#include <unistd.h>
+#include <stdlib.h>
+
 /**
- * struct specifier - struct specifier
- * @valid: the valid character.
- * @f: the functions associated.
+ * struct Set - A specifier - function pair
+ * @spec: Char - the format specifier
+ * @print: Special function implemented to print data of a given
+ * specifier to stdout
  *
+ * Description: A specifier - function pair
  */
-typedef struct specifier
+typedef struct Set
 {
-	char *valid;
-	int (*f)(va_list);
-} spec;
-int _printf(const char *format, ...);
-int print_c(va_list args);
-int print_s(va_list args);
-int print_d(va_list args);
-int print_i(va_list args);
-int _putchar(char c);
-int print_percent(va_list args);
-int (*get_func(char x))(va_list args);
+	char spec;
+	int (*print)(va_list arg);
+} set;
+
+int print_d(va_list list);
+int print_rot13(va_list list);
+int print_rev(va_list list);
+int print_str(va_list list);
+int print_char(va_list list);
+int _printf(const char*, ...);
+
 #endif
